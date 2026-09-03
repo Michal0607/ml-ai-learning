@@ -39,10 +39,8 @@ print("True values:", y)
 print("Predictions:", predictions)
 print("MSE: ", mse(y, predictions))
 
-MSE_error = mse(y, predictions)
-
 def train_loop(X, y, w, b):
-    for number in range(100):
+    for _ in range(100):
         predictions = predict(X, w, b)
         loss = mse(y, predictions)
         dw, db = gradients(X, y, predictions)
@@ -50,9 +48,9 @@ def train_loop(X, y, w, b):
         b = b - learning_rate * db
     predictions = predict(X, w, b)
     loss = mse(y, predictions)
-    return predictions, w, b, loss
+    return predictions, w, b, loss, dw, db
 
-predictions, w, b, loss = train_loop(X, y, w, b)
+predictions, w, b, loss, dw, db = train_loop(X, y, w, b)
 
 print("After training loop")
 print("w:", w, "b:", b)
